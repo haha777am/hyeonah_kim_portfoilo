@@ -11,8 +11,34 @@
             margin: 0; padding: 0;
             background-color: #000; color: #fff;
             font-family: 'Noto Sans KR', sans-serif;
-            overflow: hidden; /* 메인 화면은 스크롤 없이 깔끔하게 */
+            overflow-x: hidden; /* 가로 스크롤 방지 */
+            cursor: none; /* ✨ 기본 마우스 화살표 숨기기 */
         }
+
+        /* --- ✨ 커스텀 커서 스타일 추가 --- */
+        .custom-cursor {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 12px;
+            height: 12px;
+            background-color: #fff;
+            border-radius: 50%;
+            pointer-events: none; /* 커서 때문에 클릭이 막히지 않도록 설정 */
+            z-index: 9999;
+            transform: translate(-50%, -50%);
+            transition: width 0.3s ease, height 0.3s ease, background-color 0.3s ease;
+            mix-blend-mode: difference; /* 배경색에 따라 커서 색이 반전되는 효과 */
+        }
+
+        /* 링크에 마우스를 올렸을 때 변하는 모양 (커다란 빈 원) */
+        .custom-cursor.hover {
+            width: 45px;
+            height: 45px;
+            background-color: transparent;
+            border: 1px solid #fff;
+        }
+        /* ----------------------------------- */
 
         /* [2] 네비게이션 (전 페이지 통일 디자인) */
         header {
@@ -110,10 +136,15 @@
             .intro-right { align-items: center; text-align: center; }
             .brand-title { font-size: 18vw; }
             .circle-image-wrap { width: 60vw; height: 60vw; }
+            /* 모바일에서는 커스텀 커서를 끄는 것이 좋습니다 (터치 화면이므로) */
+            .custom-cursor { display: none; }
+            body { cursor: auto; }
         }
     </style>
 </head>
 <body>
+
+    <div class="custom-cursor"></div>
 
     <header>
         <div class="nav-capsule">
@@ -143,5 +174,25 @@
         </div>
     </main>
 
+    <script>
+        const cursor = document.querySelector('.custom-cursor');
+        const links = document.querySelectorAll('a');
+
+        // 1. 마우스 움직임에 따라 커서 위치 이동
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+        });
+
+        // 2. 링크(a 태그)에 마우스를 올렸을 때 'hover' 클래스 추가/제거
+        links.forEach(link => {
+            link.addEventListener('mouseenter', () => {
+                cursor.classList.add('hover');
+            });
+            link.addEventListener('mouseleave', () => {
+                cursor.classList.remove('hover');
+            });
+        });
+    </script>
 </body>
 </html>
