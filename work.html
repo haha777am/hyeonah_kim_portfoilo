@@ -83,12 +83,13 @@
             font-size: 14px; 
             letter-spacing: 2px; 
             transition: 0.4s; 
+            text-transform: uppercase;
         }
         .archive-item:hover .item-meta { 
             color: #fff; 
         }
 
-        /* [5] 호버 시 나타나는 이미지 미리보기 */
+        /* [5] 호버 시 나타나는 이미지 미리보기 (세로형 최적화) */
         .preview {
             position: fixed; 
             top: 50%; 
@@ -100,7 +101,7 @@
             pointer-events: none;
             transition: 0.6s cubic-bezier(0.19, 1, 0.22, 1); 
             z-index: 5;
-            background: #111; /* 이미지 로딩 전 박스색 */
+            background: #111; 
         }
         .preview img { 
             width: 100%; height: 100%; 
@@ -121,6 +122,13 @@
             from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
         }
+
+        /* 모바일 대응 */
+        @media (max-width: 768px) {
+            .page-title { font-size: 10vw; margin-bottom: 50px; }
+            .item-title { font-size: 7vw; }
+            .preview { display: none; } /* 모바일은 프리뷰 생략 */
+        }
     </style>
 </head>
 <body>
@@ -130,7 +138,7 @@
             <a href="index.html">HOME</a>
             <a href="work.html" class="active">WORK</a>
             <a href="artshow.html">ART SHOW</a>
-            <a href="collabration.html">COLLAB</a>
+            <a href="collab.html">COLLAB</a>
             <a href="cv.html">C.V</a>
         </div>
     </header>
@@ -139,3 +147,33 @@
         <h1 class="page-title">Selected Works</h1>
         
         <div class="archive-list">
+            
+            <a href="26fw.html" class="archive-item">
+                <span class="item-title">26FW Collection</span>
+                <span class="item-meta">Fashion / Archive / 2026</span>
+                <div class="preview"><img src="images/26fw_main.jpg" alt="26FW Collection Preview"></div>
+            </a>
+
+            <a href="#" class="archive-item">
+                <span class="item-title">Retail Space Planning</span>
+                <span class="item-meta">3D Design / Proposal / 2026</span>
+                <div class="preview"><img src="images/retail_preview.jpg" alt="Retail Space Preview"></div>
+            </a>
+
+            <a href="#" class="archive-item">
+                <span class="item-title">Gas Character Webtoon</span>
+                <span class="item-meta">Character Design / Social Media</span>
+                <div class="preview"><img src="images/webtoon_preview.jpg" alt="Webtoon Preview"></div>
+            </a>
+
+            <a href="#" class="archive-item">
+                <span class="item-title">Equality Campaign</span>
+                <span class="item-meta">Graphic Design / Poster / 2026</span>
+                <div class="preview"><img src="images/poster_preview.jpg" alt="Poster Preview"></div>
+            </a>
+
+        </div>
+    </main>
+
+</body>
+</html>
