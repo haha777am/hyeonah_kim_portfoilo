@@ -1,74 +1,151 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-  <meta charset="UTF-8">
-  <title>메뉴이름 - HYEON AH KIM</title>
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>26FW - HYEON AH KIM</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Noto+Sans+KR:wght@300;400&display=swap" rel="stylesheet">
+    <style>
+        /* [1] 공통 스타일 (블랙 아카이브 무드) */
+        body {
+            margin: 0; background-color: #000; color: #fff;
+            font-family: 'Noto Sans KR', sans-serif;
+            line-height: 1.6;
+        }
+
+        /* [2] 네비게이션 */
+        header {
+            position: fixed; top: 0; width: 100%; z-index: 1000;
+            padding: 30px 0; display: flex; justify-content: center;
+        }
+        .nav-capsule {
+            display: flex; background: rgba(255,255,255,0.08);
+            border-radius: 50px; padding: 5px; backdrop-filter: blur(15px);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        .nav-capsule a {
+            text-decoration: none; color: #666; padding: 10px 20px;
+            border-radius: 50px; font-size: 13px; transition: 0.3s;
+        }
+        .nav-capsule a:hover { color: #fff; }
+        .nav-capsule a.active { color: #fff; background: rgba(255,255,255,0.15); }
+
+        /* [3] 상세 페이지 레이아웃 */
+        .project-container {
+            padding: 150px 10% 100px;
+            max-width: 1200px; margin: 0 auto;
+        }
+
+        .project-header {
+            margin-bottom: 100px;
+            text-align: center;
+        }
+        .project-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 6vw; font-weight: 400; margin: 0;
+            letter-spacing: -2px;
+        }
+        .project-sub {
+            font-family: monospace; color: #555;
+            margin-top: 20px; letter-spacing: 5px; font-size: 14px;
+        }
+
+        /* [4] 이미지 섹션 스타일 */
+        section { margin-bottom: 150px; opacity: 0; transform: translateY(30px); transition: 1s all ease-out; }
+        section.visible { opacity: 1; transform: translateY(0); }
+
+        .hero-img { width: 100%; height: 80vh; object-fit: cover; border: 1px solid #222; }
+
+        .desc-text {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5vw; text-align: center; font-style: italic;
+            margin: 100px 0; color: #ccc;
+        }
+
+        .image-grid {
+            display: grid; grid-template-columns: 1fr 1fr; gap: 40px;
+        }
+        .image-grid img { width: 100%; height: auto; border: 1px solid #222; }
+
+        .full-img { width: 100%; height: auto; margin-top: 40px; }
+
+        /* 푸터 링크 */
+        .back-link {
+            display: block; text-align: center; margin-top: 100px;
+            text-decoration: none; color: #fff; font-family: monospace;
+            font-size: 13px; letter-spacing: 2px; border-bottom: 1px solid #333;
+            width: fit-content; margin-left: auto; margin-right: auto; padding-bottom: 5px;
+        }
+    </style>
 </head>
 <body>
 
-  <header>
-    <div class="nav-capsule">
-      <a href="index.html">HOME</a>
-      <a href="work.html" class="active">WORK</a> <a href="artshow.html">ART SHOW</a>
-      <a href="collab.html">COLLAB</a>
-      <a href="art.html">ART</a>
-      <a href="cv.html">C.V</a>
-    </div>
-  </header>
+    <header>
+        <div class="nav-capsule">
+            <a href="index.html">HOME</a>
+            <a href="portfolio.html" class="active">PORTFOLIO</a>
+            <a href="cv.html">C.V</a>
+        </div>
+    </header>
 
-  <main class="portfolio-wrapper">
-    <h1 class="page-title serif-font">페이지 제목(예: WORK)</h1>
-    
-    <div style="color: #888; text-align: center;">
-      <p>콘텐츠 업데이트 예정입니다.</p>
-    </div>
+    <main class="project-container">
+        
+        <header class="project-header">
+            <h1 class="project-title">26FW Collection</h1>
+            <p class="project-sub">ARCHIVE / LAYERING / RECONSTRUCTION</p>
+        </header>
 
-  </main>
+        <section class="fade-in">
+            <img src="images/finale.jpg" class="hero-img" alt="26FW Finale">
+        </section>
 
-</body>
-</html>
+        <section class="fade-in">
+            <p class="desc-text">"The beauty of structure through reconstruction."</p>
+        </section>
 
-<!DOCTYPE html>
-<html>
-<head>
-<link rel="stylesheet" href="style.css">
-</head>
-<body>
+        <section class="image-grid fade-in">
+            <div class="item">
+                <img src="images/sketch1.jpg" alt="Sketch 1">
+                <p style="font-family:monospace; font-size:11px; color:#555; margin-top:15px;">Process_01: Sketching</p>
+            </div>
+            <div class="item">
+                <img src="images/look1.jpg" alt="Look 1">
+                <p style="font-family:monospace; font-size:11px; color:#555; margin-top:15px;">Final_01: Lookbook</p>
+            </div>
+        </section>
 
-<nav>
-<ul>
-<li><a href="index.html">MAIN</a></li>
-<li><a href="work.html">WORK</a></li>
-<li><a href="collab.html">COLLABORATION</a></li>
-<li><a href="art.html">ART SHOW</a></li>
-<li><a href="contact.html">CONTACT</a></li>
-</ul>
-</nav>
+        <section class="image-grid fade-in">
+            <div class="item">
+                <img src="images/sketch2.jpg" alt="Sketch 2">
+            </div>
+            <div class="item">
+                <img src="images/look2.jpg" alt="Look 2">
+            </div>
+        </section>
 
-<h1>26FW</h1>
+        <section class="fade-in">
+            <img src="images/runway.jpg" class="full-img" alt="Runway View">
+        </section>
 
-<section class="hero fade">
-<img src="images/finale.jpg">
-</section>
+        <a href="portfolio.html" class="back-link">BACK TO ARCHIVE</a>
 
-<section class="text fade">
-<p>Archive / Layering / Reconstruction</p>
-</section>
+    </main>
 
-<section class="grid fade">
-<img src="images/sketch1.jpg">
-<img src="images/look1.jpg">
-</section>
+    <script>
+        // 스크롤 시 섹션이 부드럽게 나타나게 하는 스크립트
+        const observerOptions = { threshold: 0.1 };
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
 
-<section class="grid">
-<img src="images/sketch2.jpg">
-<img src="images/look2.jpg">
-</section>
-
-<section class="full">
-<img src="images/runway.jpg">
-</section>
+        document.querySelectorAll('section').forEach(section => {
+            observer.observe(section);
+        });
+    </script>
 
 </body>
 </html>
