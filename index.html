@@ -150,7 +150,7 @@
         const cursor = document.querySelector('.custom-cursor');
         const links = document.querySelectorAll('a');
 
-        // 1) 커서 움직임 및 링크 호버 효과
+        // [1] 커서 움직임 및 링크 호버 효과
         document.addEventListener('mousemove', (e) => {
             cursor.style.left = e.clientX + 'px';
             cursor.style.top = e.clientY + 'px';
@@ -160,16 +160,21 @@
             link.addEventListener('mouseenter', () => { cursor.classList.add('hover'); });
             link.addEventListener('mouseleave', () => { cursor.classList.remove('hover'); });
             
+            // [2] 링크 클릭 시 페이드 아웃 후 이동
             link.addEventListener('click', function(e) {
-                if (this.target === '_blank' || this.getAttribute('href').startsWith('mailto:')) return;
+                if (this.target === '_blank' || this.getAttribute('href').startsWith('#') || this.getAttribute('href').startsWith('mailto:')) return;
+
                 e.preventDefault();
                 const targetUrl = this.href;
                 document.body.classList.add('fade-out');
-                setTimeout(() => { window.location.href = targetUrl; }, 500); 
+
+                setTimeout(() => {
+                    window.location.href = targetUrl;
+                }, 500);
             });
         });
 
-        // 2) ✨ 영상 4.1초 반복 재생 제어
+        // [3] ✨ 영상 4.1초 반복 재생 제어
         const mainVideo = document.querySelector('.black-and-white-video');
         if (mainVideo) {
             mainVideo.addEventListener('timeupdate', function() {
@@ -179,6 +184,13 @@
                 }
             });
         }
+
+        // [4] ✨ 뒤로 가기 시 화면이 안 뜨는 문제 해결 (핵심!)
+        window.addEventListener('pageshow', function(event) {
+            if (event.persisted || (window.performance && window.performance.navigation.type === 2)) {
+                document.body.classList.remove('fade-out');
+            }
+        });
     </script>
 </body>
 </html>
