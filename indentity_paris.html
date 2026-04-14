@@ -22,14 +22,14 @@
 
         /* 레이아웃 */
         .show-container { padding: 150px 5% 100px; max-width: 1400px; margin: 0 auto; }
-        .show-hero { margin-bottom: 80px; border-bottom: 1px solid #222; padding-bottom: 40px; }
+        .show-hero { margin-bottom: 80px; border-bottom: 1px solid #222; padding-bottom: 40px; text-align: center; }
         .show-hero h1 { font-family: 'Playfair Display', serif; font-size: 6vw; margin: 0; line-height: 1.1; }
         .show-hero h1 span { font-style: italic; color: #a68d60; }
-        .show-meta { display: flex; gap: 40px; margin-top: 30px; font-family: monospace; font-size: 13px; color: #555; letter-spacing: 2px; text-transform: uppercase; }
+        .show-meta { display: flex; justify-content: center; gap: 40px; margin-top: 30px; font-family: monospace; font-size: 13px; color: #555; letter-spacing: 2px; text-transform: uppercase; }
 
-        .show-info { display: grid; grid-template-columns: 1fr 1.5fr; gap: 80px; margin-bottom: 100px; }
-        .info-title { font-size: 20px; font-weight: 300; line-height: 1.5; color: #ccc; }
-        .info-text { font-size: 16px; font-weight: 300; line-height: 2; color: #777; text-align: justify; }
+        .show-info { max-width: 800px; margin: 0 auto 100px; text-align: center; }
+        .info-title { font-size: 20px; font-weight: 300; line-height: 1.5; color: #ccc; margin-bottom: 30px; }
+        .info-text { font-size: 16px; font-weight: 300; line-height: 2; color: #888; text-align: justify; }
 
         /* 갤러리 설정 */
         .show-gallery { display: grid; grid-template-columns: repeat(12, 1fr); gap: 20px; }
@@ -125,14 +125,63 @@
             </div>
 
             <div class="gallery-item third">
+                <span class="overlay-text">RUNWAY 06</span>
                 <img src="images/2/06.jpg" alt="Runway 06">
             </div>
             <div class="gallery-item third">
+                <span class="overlay-text">RUNWAY 07</span>
                 <img src="images/2/07.jpg" alt="Runway 07">
             </div>
             <div class="gallery-item third">
+                <span class="overlay-text">RUNWAY 08</span>
                 <img src="images/2/08.jpg" alt="Runway 08">
             </div>
+
+            <div class="gallery-item half">
+                <span class="overlay-text">RUNWAY 09</span>
+                <img src="images/2/09.jpg" alt="Runway 09">
+            </div>
+            <div class="gallery-item half">
+                <span class="overlay-text">RUNWAY 10</span>
+                <img src="images/2/10.jpg" alt="Runway 10">
+            </div>
+
+            <div class="gallery-item wide">
+                <span class="overlay-text">RUNWAY 11</span>
+                <img src="images/2/11.jpg" alt="Runway 11">
+            </div>
+            <div class="gallery-item narrow">
+                <span class="overlay-text">RUNWAY 12</span>
+                <img src="images/2/12.jpg" alt="Runway 12">
+            </div>
+
+            <div class="gallery-item third">
+                <span class="overlay-text">RUNWAY 13</span>
+                <img src="images/2/13.jpg" alt="Runway 13">
+            </div>
+            <div class="gallery-item third">
+                <span class="overlay-text">RUNWAY 14</span>
+                <img src="images/2/14.jpg" alt="Runway 14">
+            </div>
+            <div class="gallery-item third">
+                <span class="overlay-text">RUNWAY 15</span>
+                <img src="images/2/15.jpg" alt="Runway 15">
+            </div>
+
+             <div class="gallery-item half">
+                <span class="overlay-text">RUNWAY 16</span>
+                <img src="images/2/16.jpg" alt="Runway 16">
+            </div>
+            <div class="gallery-item half">
+                <span class="overlay-text">RUNWAY 17</span>
+                <img src="images/2/17.jpg" alt="Runway 17">
+            </div>
+
+            <div class="gallery-item full">
+                <span class="overlay-text">RUNWAY 18</span>
+                <img src="images/2/18.jpg" alt="Runway 18">
+            </div>
+
 
             <div class="gallery-item half">
                 <span class="overlay-text">AFFICHE</span>
@@ -178,7 +227,6 @@
     </main>
 
     <script>
-        // 커서 및 페이드 효과 통합 스크립트
         const cursor = document.querySelector('.custom-cursor');
         document.addEventListener('mousemove', (e) => {
             cursor.style.left = e.clientX + 'px';
@@ -197,7 +245,6 @@
             });
         });
 
-        // 뒤로가기 시 흰 화면 방지
         window.addEventListener('pageshow', function(e) {
             if (e.persisted || (window.performance && window.performance.navigation.type === 2)) {
                 document.body.classList.remove('fade-out');
