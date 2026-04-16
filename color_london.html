@@ -31,16 +31,25 @@
         .info-title { font-size: 20px; font-weight: 300; line-height: 1.5; color: #ccc; margin-bottom: 30px; }
         .info-text { font-size: 16px; font-weight: 300; line-height: 2; color: #888; text-align: justify; }
 
-        /* 갤러리 설정 */
+        /* [핵심] 갤러리 스왑 구조 설정 */
         .show-gallery { display: grid; grid-template-columns: repeat(12, 1fr); gap: 20px; }
-        .gallery-item { overflow: hidden; background: #111; position: relative; }
+        .gallery-item { overflow: hidden; background: #111; position: relative; display: block; text-decoration: none;}
         
-        /* 사진 및 영상 꽉 차게 설정 */
-        .gallery-item img, .gallery-item video { 
+        /* ✨ 사진 기본 설정 (흑백 필터 제거, 트랜지션 설정) */
+        .gallery-item img { 
+            position: absolute; top: 0; left: 0;
             width: 100%; height: 100%; object-fit: cover; display: block; 
-            filter: grayscale(80%); transition: 0.8s cubic-bezier(0.19, 1, 0.22, 1); 
+            /* filter: grayscale(80%); <- 제거됨 (컬러유지) */
+            transition: opacity 1s cubic-bezier(0.19, 1, 0.22, 1), transform 1.2s cubic-bezier(0.19, 1, 0.22, 1); 
         }
-        .gallery-item:hover img, .gallery-item:hover video { filter: grayscale(0%); transform: scale(1.02); }
+
+        /* ✨ 두 사진의 레이어 순서 */
+        .photo-static { opacity: 1; z-index: 2; } /* 기본 사진이 위에 */
+        .photo-hover { opacity: 0; z-index: 1; transform: scale(1.05); } /* 호버 사진은 밑에 살짝 크게 대기 */
+
+        /* ✨ 호버 시 스왑 효과 */
+        .gallery-item:hover .photo-static { opacity: 0; } /* 기본 사진 숨김 */
+        .gallery-item:hover .photo-hover { opacity: 1; transform: scale(1); } /* 호버 사진 나타나며 정크기 */
 
         /* 그리드 변형 */
         .full { grid-column: span 12; height: 75vh; margin-bottom: 40px; }
@@ -55,15 +64,17 @@
             font-family: monospace; font-size: 12px; color: #fff; letter-spacing: 2px;
             opacity: 0; transition: 0.5s; pointer-events: none; text-shadow: 0px 2px 4px rgba(0,0,0,0.8);
         }
-        .gallery-item:hover .overlay-text { opacity: 1; }
+        .gallery-item:hover .overlay-text { opacity: 1; z-index: 11; }
 
         @media (max-width: 768px) {
             .show-info { grid-template-columns: 1fr; }
             .show-hero h1 { font-size: 10vw; }
             .show-gallery { display: flex; flex-direction: column; }
-            .full, .wide, .narrow, .half, .third { height: auto; margin: 0; }
+            .full, .wide, .narrow, .half, .third { height: auto; margin: 0; min-height: 300px;}
             .custom-cursor { display: none; }
             body { cursor: auto; }
+            .photo-hover { display: none; } /* 모바일에서는 스왑 끄고 기본 사진만 */
+            .photo-static { opacity: 1 !important; position: relative; }
         }
     </style>
 </head>
@@ -94,142 +105,163 @@
         <div class="show-gallery">
             
             <div class="gallery-item full">
-                <span class="overlay-text">MAIN SHOW FILM</span>
-                <video autoplay muted loop playsinline>
-                    <source src="images/3/video2.mp4" type="video/mp4">
-                </video>
+                <span class="overlay-text">MAIN CONCEPT</span>
+                <img src="images/3/9.jpg" alt="Main Static" class="photo-static">
+                <img src="images/3/hero_hover.jpg" alt="Main Hover" class="photo-hover">
             </div>
 
             <div class="gallery-item half">
-                <span class="overlay-text">SIDE FILM</span>
-                <video id="special-side-video" autoplay muted playsinline>
-                    <source src="images/3/video1.mp4" type="video/mp4">
-                </video>
+                <span class="overlay-text">SIDE VIEW</span>
+                <img src="images/3/1.jpg" alt="Side Static" class="photo-static">
+                <img src="images/3/side_hover.jpg" alt="Side Hover" class="photo-hover">
             </div>
             <div class="gallery-item half">
                 <span class="overlay-text">ETUDE PROCESS</span>
-                <img src="images/3/etude0.jpg" alt="Etude 0">
+                <img src="images/3/etude0.jpg" alt="Etude Process Static" class="photo-static">
+                <img src="images/3/etude0_hover.jpg" alt="Etude Process Hover" class="photo-hover">
             </div>
 
             <div class="gallery-item wide">
                 <span class="overlay-text">RUNWAY 01</span>
-                <img src="images/3/01.jpg" alt="Runway 01">
+                <img src="images/3/1.jpg" alt="Runway 01" class="photo-static">
+                <img src="images/3/1_hover.jpg" alt="Runway 01 Hover" class="photo-hover">
             </div>
             <div class="gallery-item narrow">
                 <span class="overlay-text">RUNWAY 02</span>
-                <img src="images/3/02.jpg" alt="Runway 02">
+                <img src="images/3/2.jpg" alt="Runway 02" class="photo-static">
+                <img src="images/3/2_hover.jpg" alt="Runway 02 Hover" class="photo-hover">
             </div>
 
             <div class="gallery-item third">
                 <span class="overlay-text">RUNWAY 03</span>
-                <img src="images/3/03.jpg" alt="Runway 03">
+                <img src="images/3/3.jpg" alt="Runway 03" class="photo-static">
+                <img src="images/3/3_hover.jpg" alt="Runway 03 Hover" class="photo-hover">
             </div>
             <div class="gallery-item third">
                 <span class="overlay-text">RUNWAY 04</span>
-                <img src="images/3/04.jpg" alt="Runway 04">
+                <img src="images/3/4.jpg" alt="Runway 04" class="photo-static">
+                <img src="images/3/4_hover.jpg" alt="Runway 04 Hover" class="photo-hover">
             </div>
             <div class="gallery-item third">
                 <span class="overlay-text">RUNWAY 05</span>
-                <img src="images/3/05.jpg" alt="Runway 05">
+                <img src="images/3/5.jpg" alt="Runway 05" class="photo-static">
+                <img src="images/3/5_hover.jpg" alt="Runway 05 Hover" class="photo-hover">
             </div>
 
             <div class="gallery-item half">
                 <span class="overlay-text">RUNWAY 06</span>
-                <img src="images/3/06.jpg" alt="Runway 06">
+                <img src="images/3/6.jpg" alt="Runway 06" class="photo-static">
+                <img src="images/3/6_hover.jpg" alt="Runway 06 Hover" class="photo-hover">
             </div>
             <div class="gallery-item half">
                 <span class="overlay-text">RUNWAY 07</span>
-                <img src="images/3/07.jpg" alt="Runway 07">
+                <img src="images/3/7.jpg" alt="Runway 07" class="photo-static">
+                <img src="images/3/7_hover.jpg" alt="Runway 07 Hover" class="photo-hover">
             </div>
 
             <div class="gallery-item full">
                 <span class="overlay-text">RUNWAY 08</span>
-                <img src="images/3/08.jpg" alt="Runway 08">
+                <img src="images/3/8.jpg" alt="Runway 08" class="photo-static">
+                <img src="images/3/8_hover.jpg" alt="Runway 08 Hover" class="photo-hover">
             </div>
 
             <div class="gallery-item narrow">
                 <span class="overlay-text">RUNWAY 09</span>
-                <img src="images/3/09.jpg" alt="Runway 09">
+                <img src="images/3/9.jpg" alt="Runway 09" class="photo-static">
+                <img src="images/3/9_hover.jpg" alt="Runway 09 Hover" class="photo-hover">
             </div>
             <div class="gallery-item wide">
                 <span class="overlay-text">RUNWAY 10</span>
-                <img src="images/3/10.jpg" alt="Runway 10">
+                <img src="images/3/10.jpg" alt="Runway 10" class="photo-static">
+                <img src="images/3/10_hover.jpg" alt="Runway 10 Hover" class="photo-hover">
             </div>
 
             <div class="gallery-item third">
                 <span class="overlay-text">RUNWAY 11</span>
-                <img src="images/3/11.jpg" alt="Runway 11">
+                <img src="images/3/11.jpg" alt="Runway 11" class="photo-static">
+                <img src="images/3/11_hover.jpg" alt="Runway 11 Hover" class="photo-hover">
             </div>
             <div class="gallery-item third">
                 <span class="overlay-text">RUNWAY 12</span>
-                <img src="images/3/12.jpg" alt="Runway 12">
+                <img src="images/3/12.jpg" alt="Runway 12" class="photo-static">
+                <img src="images/3/12_hover.jpg" alt="Runway 12 Hover" class="photo-hover">
             </div>
             <div class="gallery-item third">
                 <span class="overlay-text">RUNWAY 13</span>
-                <img src="images/3/13.jpg" alt="Runway 13">
+                <img src="images/3/13.jpg" alt="Runway 13" class="photo-static">
+                <img src="images/3/13_hover.jpg" alt="Runway 13 Hover" class="photo-hover">
             </div>
 
             <div class="gallery-item half">
                 <span class="overlay-text">RUNWAY 14</span>
-                <img src="images/3/14.jpg" alt="Runway 14">
+                <img src="images/3/14.jpg" alt="Runway 14" class="photo-static">
+                <img src="images/3/14_hover.jpg" alt="Runway 14 Hover" class="photo-hover">
             </div>
             <div class="gallery-item half">
                 <span class="overlay-text">RUNWAY 15</span>
-                <img src="images/3/15.jpg" alt="Runway 15">
+                <img src="images/3/15.jpg" alt="Runway 15" class="photo-static">
+                <img src="images/3/15_hover.jpg" alt="Runway 15 Hover" class="photo-hover">
             </div>
 
             <div class="gallery-item full">
                 <span class="overlay-text">RUNWAY 16</span>
-                <img src="images/3/16.jpg" alt="Runway 16">
+                <img src="images/3/16.jpg" alt="Runway 16" class="photo-static">
+                <img src="images/3/16_hover.jpg" alt="Runway 16 Hover" class="photo-hover">
             </div>
 
             <div class="gallery-item wide">
                 <span class="overlay-text">RUNWAY 17</span>
-                <img src="images/3/17.jpg" alt="Runway 17">
+                <img src="images/3/17.jpg" alt="Runway 17" class="photo-static">
+                <img src="images/3/17_hover.jpg" alt="Runway 17 Hover" class="photo-hover">
             </div>
             <div class="gallery-item narrow">
                 <span class="overlay-text">RUNWAY 18</span>
-                <img src="images/3/18.jpg" alt="Runway 18">
+                <img src="images/3/18.jpg" alt="Runway 18" class="photo-static">
+                <img src="images/3/18_hover.jpg" alt="Runway 18 Hover" class="photo-hover">
             </div>
 
             <div class="gallery-item third">
                 <span class="overlay-text">RUNWAY 19</span>
-                <img src="images/3/19.jpg" alt="Runway 19">
+                <img src="images/3/19.jpg" alt="Runway 19" class="photo-static">
+                <img src="images/3/19_hover.jpg" alt="Runway 19 Hover" class="photo-hover">
             </div>
             <div class="gallery-item third">
                 <span class="overlay-text">RUNWAY 20</span>
-                <img src="images/3/20.jpg" alt="Runway 20">
+                <img src="images/3/20.jpg" alt="Runway 20" class="photo-static">
+                <img src="images/3/20_hover.jpg" alt="Runway 20 Hover" class="photo-hover">
             </div>
             <div class="gallery-item third">
                 <span class="overlay-text">RUNWAY 21</span>
-                <img src="images/3/21.jpg" alt="Runway 21">
+                <img src="images/3/21.jpg" alt="Runway 21" class="photo-static">
+                <img src="images/3/21_hover.jpg" alt="Runway 21 Hover" class="photo-hover">
             </div>
 
 
             <div class="gallery-item half">
-                <span class="overlay-text">ETUDE FILM 1</span>
-                <video autoplay muted loop playsinline>
-                    <source src="images/3/etude1.MP4" type="video/mp4">
-                </video>
+                <span class="overlay-text">ETUDE CONCEPT 1</span>
+                <img src="images/3/etude1.jpg" alt="Etude 1 Static" class="photo-static">
+                <img src="images/3/etude1_hover.jpg" alt="Etude 1 Hover" class="photo-hover">
             </div>
             <div class="gallery-item half">
-                <span class="overlay-text">ETUDE FILM 2</span>
-                <video autoplay muted loop playsinline>
-                    <source src="images/3/etude2.MP4" type="video/mp4">
-                </video>
+                <span class="overlay-text">ETUDE CONCEPT 2</span>
+                <img src="images/3/etude2.jpg" alt="Etude 2 Static" class="photo-static">
+                <img src="images/3/etude2_hover.jpg" alt="Etude 2 Hover" class="photo-hover">
             </div>
 
             <div class="gallery-item third">
                 <span class="overlay-text">AFFICHE 1</span>
-                <img src="images/3/affiche.jpg" alt="Affiche 1">
+                <img src="images/3/affiche.jpg" alt="Affiche 1 Static" class="photo-static">
+                <img src="images/3/affiche_hover.jpg" alt="Affiche 1 Hover" class="photo-hover">
             </div>
             <div class="gallery-item third">
                 <span class="overlay-text">AFFICHE 2</span>
-                <img src="images/3/affiche2.jpg" alt="Affiche 2">
+                <img src="images/3/affiche2.jpg" alt="Affiche 2 Static" class="photo-static">
+                <img src="images/3/affiche2_hover.jpg" alt="Affiche 2 Hover" class="photo-hover">
             </div>
             <div class="gallery-item third">
                 <span class="overlay-text">HAIR CONCEPT</span>
-                <img src="images/3/hair.jpg" alt="Hair Concept">
+                <img src="images/3/hair.jpg" alt="Hair Concept Static" class="photo-static">
+                <img src="images/3/hair_hover.jpg" alt="Hair Concept Hover" class="photo-hover">
             </div>
 
         </div>
@@ -259,35 +291,7 @@
             });
         });
 
-        window.addEventListener('pageshow', function(e) {
-            if (e.persisted || (window.performance && window.performance.navigation.type === 2)) {
-                document.body.classList.remove('fade-out');
-            }
-        });
-
-        // ✨ 3. video1.mp4 커스텀 구간 반복 스크립트 (완벽 보완)
-        const specialVideo = document.getElementById('special-side-video');
-        
-        if (specialVideo) {
-            // 안전한 시작: 브라우저가 영상을 로드하자마자 1초로 맞춥니다.
-            const initVideo = () => { specialVideo.currentTime = 1; };
-            if (specialVideo.readyState >= 1) { initVideo(); } 
-            else { specialVideo.addEventListener('loadedmetadata', initVideo); }
-
-            // 재생 중 시간 체크
-            specialVideo.addEventListener('timeupdate', function() {
-                // 6초가 넘고 52초 미만일 때 -> 52초로 점프!
-                if (this.currentTime >= 6 && this.currentTime < 52) {
-                    this.currentTime = 52;
-                }
-            });
-
-            // 영상이 완전히 끝나면 다시 1초로 돌아가서 재생 (무한 루프)
-            specialVideo.addEventListener('ended', function() {
-                this.currentTime = 1;
-                this.play();
-            });
-        }
+        // ✨ 영상 반복 재생 스크립트 제거됨 (영상을 안 쓰므로)
     </script>
 </body>
 </html>
