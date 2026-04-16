@@ -31,24 +31,30 @@
         .info-text { font-size: 16px; font-weight: 300; line-height: 2; color: #888; text-align: justify; }
 
         /* 갤러리 설정 */
-        .show-gallery { display: grid; grid-template-columns: repeat(12, 1fr); gap: 20px; }
-        .gallery-item { overflow: hidden; background: #111; position: relative; }
+        .show-gallery { display: grid; grid-template-columns: repeat(12, 1fr); gap: 40px 20px; } /* 상하 여백을 40px로 늘려 지그재그 시 답답함 해소 */
+        .gallery-item { overflow: hidden; background: transparent; position: relative; } /* 배경을 투명하게 해서 여백이 자연스럽게 보이도록 */
         
-        /* 사진 및 영상이 꽉 차게 설정 */
+        /* ✨ 사진 및 영상 꽉 차게 설정 (흑백 필터 제거!) */
         .gallery-item img, .gallery-item video { 
             width: 100%; height: 100%; object-fit: cover; display: block; 
-            filter: grayscale(80%); transition: 0.8s cubic-bezier(0.19, 1, 0.22, 1); 
+            transition: 0.8s cubic-bezier(0.19, 1, 0.22, 1); 
         }
-        .gallery-item:hover img, .gallery-item:hover video { filter: grayscale(0%); transform: scale(1.02); }
+        /* 호버 시 살짝 커지는 효과만 남김 */
+        .gallery-item:hover img, .gallery-item:hover video { transform: scale(1.02); }
 
-        /* 그리드 변형 (사진이 예쁘게 물리도록 높이 지정) */
-        .full { grid-column: span 12; height: 75vh; margin-bottom: 40px; }
-        .wide { grid-column: span 8; height: 600px; }
-        .narrow { grid-column: span 4; height: 600px; }
-        .half { grid-column: span 6; height: 700px; }
-        .third { grid-column: span 4; height: 500px; } /* 3개 나란히 배치용 */
+        /* ✨ 그리드 변형 클래스 */
+        .full { grid-column: span 12; height: auto; } /* 가로 100% 꽉 채우고 비율 유지 */
+        .half { grid-column: span 6; height: auto; } /* 가로 절반 (1줄에 2개) */
+        
+        /* 1~11번 지그재그 배치를 위한 8칸짜리 블록 */
+        .align-left { grid-column: 1 / span 8; height: auto; } /* 왼쪽부터 8칸 차지 */
+        .align-right { grid-column: 5 / span 8; height: auto; } /* 5번째 칸부터 8칸 차지 (오른쪽 정렬 효과) */
 
-        /* 텍스트 오버레이 (마우스 올리면 나오는 글씨) */
+        /* 작은 사진 3개 나란히 배치용 (비율 유지) */
+        .third-auto { grid-column: span 4; height: auto; display: flex; align-items: center; justify-content: center; }
+        .third-auto img { object-fit: contain; max-height: 500px; } /* 잘리지 않고 전체가 다 보이게 contain 적용 */
+
+        /* 텍스트 오버레이 */
         .overlay-text {
             position: absolute; bottom: 20px; left: 20px; z-index: 10;
             font-family: monospace; font-size: 12px; color: #fff; letter-spacing: 2px;
@@ -60,7 +66,7 @@
             .show-info { grid-template-columns: 1fr; }
             .show-hero h1 { font-size: 10vw; }
             .show-gallery { display: flex; flex-direction: column; }
-            .full, .wide, .narrow, .half, .third { height: auto; margin: 0; }
+            .full, .half, .align-left, .align-right, .third-auto { height: auto; margin: 0; }
             .custom-cursor { display: none; }
             body { cursor: auto; }
         }
@@ -100,74 +106,76 @@
                 </video>
             </div>
 
-            <div class="gallery-item half">
+            <div class="gallery-item align-left">
                 <span class="overlay-text">RUNWAY 01</span>
                 <img src="images/2/01.jpg" alt="Runway 01">
             </div>
-            <div class="gallery-item half">
+            <div class="gallery-item align-right">
                 <span class="overlay-text">RUNWAY 02</span>
                 <img src="images/2/02.jpg" alt="Runway 02">
             </div>
 
-            <div class="gallery-item wide">
+            <div class="gallery-item align-left">
                 <span class="overlay-text">RUNWAY 03</span>
                 <img src="images/2/03.jpg" alt="Runway 03">
             </div>
-            <div class="gallery-item narrow">
+            <div class="gallery-item align-right">
                 <span class="overlay-text">RUNWAY 04</span>
                 <img src="images/2/04.jpg" alt="Runway 04">
             </div>
 
-            <div class="gallery-item full">
+            <div class="gallery-item align-left">
                 <span class="overlay-text">RUNWAY 05</span>
                 <img src="images/2/05.jpg" alt="Runway 05">
             </div>
-
-            <div class="gallery-item third">
+            <div class="gallery-item align-right">
                 <span class="overlay-text">RUNWAY 06</span>
                 <img src="images/2/06.jpg" alt="Runway 06">
             </div>
-            <div class="gallery-item third">
+
+            <div class="gallery-item align-left">
                 <span class="overlay-text">RUNWAY 07</span>
                 <img src="images/2/07.jpg" alt="Runway 07">
             </div>
-            <div class="gallery-item third">
+            <div class="gallery-item align-right">
                 <span class="overlay-text">RUNWAY 08</span>
                 <img src="images/2/08.jpg" alt="Runway 08">
             </div>
 
-            <div class="gallery-item half">
+            <div class="gallery-item align-left">
                 <span class="overlay-text">RUNWAY 09</span>
                 <img src="images/2/09.jpg" alt="Runway 09">
             </div>
-            <div class="gallery-item half">
+            <div class="gallery-item align-right">
                 <span class="overlay-text">RUNWAY 10</span>
                 <img src="images/2/10.jpg" alt="Runway 10">
             </div>
 
-            <div class="gallery-item wide">
+            <div class="gallery-item align-left">
                 <span class="overlay-text">RUNWAY 11</span>
                 <img src="images/2/11.jpg" alt="Runway 11">
             </div>
-            <div class="gallery-item narrow">
+
+
+            <div class="gallery-item half">
                 <span class="overlay-text">RUNWAY 12</span>
                 <img src="images/2/12.jpg" alt="Runway 12">
             </div>
-
-            <div class="gallery-item third">
+            <div class="gallery-item half">
                 <span class="overlay-text">RUNWAY 13</span>
                 <img src="images/2/13.jpg" alt="Runway 13">
             </div>
-            <div class="gallery-item third">
+
+            <div class="gallery-item half">
                 <span class="overlay-text">RUNWAY 14</span>
                 <img src="images/2/14.jpg" alt="Runway 14">
             </div>
-            <div class="gallery-item third">
+            <div class="gallery-item half">
                 <span class="overlay-text">RUNWAY 15</span>
                 <img src="images/2/15.jpg" alt="Runway 15">
             </div>
 
-             <div class="gallery-item half">
+            <div class="gallery-item half">
                 <span class="overlay-text">RUNWAY 16</span>
                 <img src="images/2/16.jpg" alt="Runway 16">
             </div>
@@ -176,50 +184,48 @@
                 <img src="images/2/17.jpg" alt="Runway 17">
             </div>
 
-            <div class="gallery-item full">
+            <div class="gallery-item half">
                 <span class="overlay-text">RUNWAY 18</span>
                 <img src="images/2/18.jpg" alt="Runway 18">
             </div>
-
-
             <div class="gallery-item half">
-                <span class="overlay-text">AFFICHE</span>
-                <img src="images/2/affiche.jpg" alt="Affiche">
+                <span class="overlay-text">AFFICHE 1</span>
+                <img src="images/2/affiche.jpg" alt="Affiche 1">
             </div>
             <div class="gallery-item half">
+                <span class="overlay-text">AFFICHE 2</span>
+                <img src="images/2/affiche2.jpg" alt="Affiche 2">
+            </div>
+
+            <div class="gallery-item full">
                 <span class="overlay-text">INVITATION</span>
                 <img src="images/2/invitation.jpg" alt="Invitation">
             </div>
 
-            <div class="gallery-item wide">
+
+            <div class="gallery-item third-auto">
+                <span class="overlay-text">LUMIERE</span>
+                <img src="images/2/lumiere.jpg" alt="Lumiere">
+            </div>
+            <div class="gallery-item third-auto">
+                <span class="overlay-text">PASSAGE</span>
+                <img src="images/2/passage.jpg" alt="Passage">
+            </div>
+            <div class="gallery-item third-auto">
+                <span class="overlay-text">CHAISE</span>
+                <img src="images/2/chaise.jpg" alt="Chaise">
+            </div>
+
+
+            <div class="gallery-item full">
                 <span class="overlay-text">MAKE UP CONCEPT</span>
                 <img src="images/2/make_up.jpg" alt="Make up">
             </div>
-            <div class="gallery-item narrow">
-                <span class="overlay-text">ATMOSPHERE</span>
-                <img src="images/2/lumiere.jpg" alt="Lumiere">
-            </div>
 
-            <div class="gallery-item third">
-                <span class="overlay-text">SPACE: CHAISE</span>
-                <img src="images/2/chaise.jpg" alt="Chaise">
-            </div>
-            <div class="gallery-item third">
-                <span class="overlay-text">SPACE: DISTANCE</span>
-                <img src="images/2/distance.jpg" alt="Distance">
-            </div>
-            <div class="gallery-item third">
-                <span class="overlay-text">SPACE: PASSAGE</span>
-                <img src="images/2/passage.jpg" alt="Passage">
-            </div>
 
-            <div class="gallery-item half">
-                <span class="overlay-text">DIRECTOR</span>
-                <img src="images/2/me.JPG" alt="Director Hyeon Ah Kim">
-            </div>
-            <div class="gallery-item half">
-                <span class="overlay-text">DIRECTOR</span>
-                <img src="images/2/me2.JPG" alt="Director Hyeon Ah Kim 2">
+            <div class="gallery-item full">
+                <span class="overlay-text">FINALE</span>
+                <img src="images/2/z.jpg" alt="Finale Z">
             </div>
 
         </div>
@@ -236,8 +242,7 @@
             link.addEventListener('mouseenter', () => cursor.classList.add('hover'));
             link.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
             
-            // 문제를 일으키던 e.preventDefault() 와 setTimeout 스크립트를 제거했습니다!
-            // 이제 기본 HTML 링크 방식으로 아주 깔끔하고 확실하게 페이지가 넘어갑니다.
+            // 페이지 넘김 스크립트 삭제 완료 (기본 동작)
         });
     </script>
 </body>
