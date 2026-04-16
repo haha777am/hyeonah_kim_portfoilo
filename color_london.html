@@ -27,7 +27,7 @@
         .show-hero h1 span { font-style: italic; color: #a68d60; }
         .show-meta { display: flex; justify-content: center; gap: 40px; margin-top: 30px; font-family: monospace; font-size: 13px; color: #555; letter-spacing: 2px; text-transform: uppercase; }
 
-        /* 중간 설명글 영역 */
+        /* 중간 설명글 영역 (비디오 아래로 이동) */
         .show-info { max-width: 800px; margin: 100px auto; text-align: center; border-top: 1px solid #222; padding-top: 80px; }
         .info-title { font-size: 20px; font-weight: 300; line-height: 1.5; color: #ccc; margin-bottom: 30px; }
         .info-text { font-size: 16px; font-weight: 300; line-height: 2; color: #888; text-align: justify; }
@@ -56,10 +56,14 @@
         .half { grid-column: span 6; height: auto; } /* 한 줄에 두 개 */
         .center-small { grid-column: 4 / span 6; height: auto; margin: 0 auto; width: 100%; } /* 중앙에 작게 (video1) */
 
-        /* ✨ 계단식(지그재그) 배치를 위한 클래스 */
-        .step-left { grid-column: 1 / span 7; height: auto; z-index: 1; } /* 왼쪽 정렬 */
-        /* 오른쪽 정렬 + 위쪽 여백을 음수로 주어 왼쪽 사진과 세로로 겹쳐 보이게 (계단 효과) */
-        .step-right { grid-column: 6 / span 7; height: auto; margin-top: -150px; z-index: 2; } 
+        /* ✨ 사진 크기 및 간격 조절 클래스 (비디오 아래 사진용) */
+        .item-small { 
+            grid-column: span 3; /* 한 줄에 4개 */
+            height: auto; 
+            width: 70%; /* 사이즈 70%로 줄임 */
+            margin: 0 auto; /* 중앙 정렬 */
+            /* margin-top: -100px; <- 제거됨 (안 겹치게) */
+        }
 
         /* A4 사이즈 잘림 방지 */
         .contain-img img { object-fit: contain; max-height: 700px; background: #000; }
@@ -67,7 +71,7 @@
         @media (max-width: 768px) {
             .show-hero h1 { font-size: 10vw; }
             .show-gallery { display: flex; flex-direction: column; gap: 30px; }
-            .full, .half, .center-small, .step-left, .step-right { height: auto; margin: 0; }
+            .full, .half, .center-small, .item-small { height: auto; margin: 0; }
             .custom-cursor { display: none; }
             body { cursor: auto; }
         }
@@ -118,102 +122,95 @@
 
         <div class="show-gallery">
 
-            <div class="gallery-item step-left">
+            <div class="gallery-item item-small">
                 <span class="overlay-text">RUNWAY 01</span>
                 <img src="images/3/1.jpg" alt="Runway 01">
             </div>
-            <div class="gallery-item step-right">
+            <div class="gallery-item item-small">
                 <span class="overlay-text">RUNWAY 02</span>
                 <img src="images/3/2.jpg" alt="Runway 02">
             </div>
-
-            <div class="gallery-item step-left">
+            <div class="gallery-item item-small">
                 <span class="overlay-text">RUNWAY 03</span>
                 <img src="images/3/3.jpg" alt="Runway 03">
             </div>
-            <div class="gallery-item step-right">
+            <div class="gallery-item item-small">
                 <span class="overlay-text">RUNWAY 04</span>
                 <img src="images/3/4.jpg" alt="Runway 04">
             </div>
 
-            <div class="gallery-item step-left">
+            <div class="gallery-item item-small">
                 <span class="overlay-text">RUNWAY 05</span>
                 <img src="images/3/5.jpg" alt="Runway 05">
             </div>
-            <div class="gallery-item step-right">
+            <div class="gallery-item item-small">
                 <span class="overlay-text">RUNWAY 06</span>
                 <img src="images/3/6.jpg" alt="Runway 06">
             </div>
-
-            <div class="gallery-item step-left">
+            <div class="gallery-item item-small">
                 <span class="overlay-text">RUNWAY 07</span>
                 <img src="images/3/7.jpg" alt="Runway 07">
             </div>
-            <div class="gallery-item step-right">
+            <div class="gallery-item item-small">
                 <span class="overlay-text">RUNWAY 08</span>
                 <img src="images/3/8.jpg" alt="Runway 08">
             </div>
 
-            <div class="gallery-item step-left">
+            <div class="gallery-item item-small">
                 <span class="overlay-text">RUNWAY 09</span>
                 <img src="images/3/9.jpg" alt="Runway 09">
             </div>
-            <div class="gallery-item step-right">
+            <div class="gallery-item item-small">
                 <span class="overlay-text">RUNWAY 10</span>
                 <img src="images/3/10.jpg" alt="Runway 10">
             </div>
-
-            <div class="gallery-item step-left">
+            <div class="gallery-item item-small">
                 <span class="overlay-text">RUNWAY 11</span>
                 <img src="images/3/11.jpg" alt="Runway 11">
             </div>
-            <div class="gallery-item step-right">
+            <div class="gallery-item item-small">
                 <span class="overlay-text">RUNWAY 12</span>
                 <img src="images/3/12.jpg" alt="Runway 12">
             </div>
 
-            <div class="gallery-item step-left">
+            <div class="gallery-item item-small">
                 <span class="overlay-text">RUNWAY 13</span>
                 <img src="images/3/13.jpg" alt="Runway 13">
             </div>
-            <div class="gallery-item step-right">
+            <div class="gallery-item item-small">
                 <span class="overlay-text">RUNWAY 14</span>
                 <img src="images/3/14.jpg" alt="Runway 14">
             </div>
-
-            <div class="gallery-item step-left">
+            <div class="gallery-item item-small">
                 <span class="overlay-text">RUNWAY 15</span>
                 <img src="images/3/15.jpg" alt="Runway 15">
             </div>
-            <div class="gallery-item step-right">
+            <div class="gallery-item item-small">
                 <span class="overlay-text">RUNWAY 16</span>
                 <img src="images/3/16.jpg" alt="Runway 16">
             </div>
 
-            <div class="gallery-item step-left">
+            <div class="gallery-item item-small">
                 <span class="overlay-text">RUNWAY 17</span>
                 <img src="images/3/17.jpg" alt="Runway 17">
             </div>
-            <div class="gallery-item step-right">
+            <div class="gallery-item item-small">
                 <span class="overlay-text">RUNWAY 18</span>
                 <img src="images/3/18.jpg" alt="Runway 18">
             </div>
-
-            <div class="gallery-item step-left">
+            <div class="gallery-item item-small">
                 <span class="overlay-text">RUNWAY 19</span>
                 <img src="images/3/19.jpg" alt="Runway 19">
             </div>
-            <div class="gallery-item step-right">
+            <div class="gallery-item item-small">
                 <span class="overlay-text">RUNWAY 20</span>
                 <img src="images/3/20.jpg" alt="Runway 20">
             </div>
             
-            <div class="gallery-item step-left">
+            <div class="gallery-item item-small">
                 <span class="overlay-text">RUNWAY 21</span>
                 <img src="images/3/21.jpg" alt="Runway 21">
             </div>
-
-            <div class="full" style="height: 100px;"></div>
 
             <div class="gallery-item half contain-img">
                 <span class="overlay-text">AFFICHE 1</span>
