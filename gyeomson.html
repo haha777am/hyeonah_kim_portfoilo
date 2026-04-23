@@ -64,12 +64,11 @@
         
         /* 레이아웃 클래스 */
         .full { grid-column: span 12; margin-bottom: 20px; } 
-        .half { grid-column: span 6; margin-bottom: 20px; } 
 
         @media (max-width: 768px) {
             .project-info { grid-template-columns: 1fr; gap: 30px; }
             .gallery-grid { display: flex; flex-direction: column; gap: 30px; }
-            .full, .half { margin-bottom: 0; }
+            .full { margin-bottom: 0; }
             .project-hero h1 { font-size: 12vw; }
             .back-btn { top: 20px; font-size: 11px; }
             .custom-cursor { display: none; }
@@ -119,24 +118,24 @@
 
         <div class="gallery-grid">
             
-            <div class="gallery-item half">
+            <div class="gallery-item full">
                 <img src="images/gyeomson/neckarf01.jpg" alt="Gyeomson Floral Pattern Skyblue">
             </div>
-            <div class="gallery-item half">
+            <div class="gallery-item full">
                 <img src="images/gyeomson/neckarf02.jpg" alt="Gyeomson Floral Pattern Black">
             </div>
 
-            <div class="gallery-item half">
+            <div class="gallery-item full">
                 <img src="images/gyeomson/neckarf03.jpg" alt="Gyeomson Geometric Pattern Gold">
             </div>
-            <div class="gallery-item half">
+            <div class="gallery-item full">
                 <img src="images/gyeomson/neckarf04.jpg" alt="Gyeomson Geometric Pattern Green">
             </div>
 
-            <div class="gallery-item half">
+            <div class="gallery-item full">
                 <img src="images/gyeomson/neckarf05.jpg" alt="Gyeomson Typography Pattern Black">
             </div>
-            <div class="gallery-item half">
+            <div class="gallery-item full">
                 <img src="images/gyeomson/neckarf06.jpg" alt="Gyeomson Typography Pattern Brown">
             </div>
 
